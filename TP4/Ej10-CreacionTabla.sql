@@ -1,0 +1,13 @@
+CREATE TABLE Empleados (
+    Id INT PRIMARY KEY AUTO_INCREMENT,
+    Nombre VARCHAR(100) NOT NULL,
+    Departamento VARCHAR(50) NOT NULL,
+    Salario DECIMAL(10,2) NOT NULL
+);
+
+CREATE TABLE Ventas (
+    VentaId INT PRIMARY KEY AUTO_INCREMENT,
+    EmpleadoId INT FOREIGN KEY REFERENCES Empleados(Id),
+    Monto DECIMAL(10,2) NOT NULL,
+    FechaVenta DATE NOT NULL
+);
