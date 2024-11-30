@@ -1,0 +1,42 @@
+// Definición de la base de datos
+
+Table usuarios {
+    id_usuario int [pk, increment]  // Identificador unico del usuario
+    nombre varchar(100)
+    email varchar(100) [unique]  // Correo electrónico unico
+    fecha_registro date
+    cuota_mensual decimal(10, 2)  // Cuota mensual del usuario
+}
+
+Table libros {
+    id_libro int [pk, increment]  // Identificador unico del libro
+    titulo varchar(255)
+    autor varchar(100)
+    genero varchar(50)
+    fecha_publicacion date
+    cantidad_disponible int  // Cantidad de copias disponibles
+}
+
+Table prestamos {
+    id_prestamo int [pk, increment]  // Identificador unico del prestamo
+    id_usuario int
+    id_libro int
+    fecha_prestamo date
+    fecha_devolucion date
+    multa decimal(10, 2)  // Multa por retraso, si aplica
+    estado enum('Prestado', 'Devuelto')  // Estado del prestamo
+}
+
+Table pagos {
+    id_pago int [pk, increment]  // Identificador unico del pago
+    id_usuario int
+    monto decimal(10, 2)  // Monto pagado por el usuario
+    fecha_pago date
+    mes_pago int  // Mes al que corresponde el pago
+    anio_pago int  // Año al que corresponde el pago
+}
+
+// Relaciones entre las tablas
+Ref: prestamos.id_usuario > usuarios.id_usuario
+Ref: prestamos.id_libro > libros.id_libro
+Ref: pagos.id_usuario > usuarios.id_usuario
